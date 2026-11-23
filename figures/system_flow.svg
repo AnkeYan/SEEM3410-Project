@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="360" viewBox="0 0 1000 360">
+  <defs>
+    <style>
+      .title { font: 700 22px Arial, sans-serif; fill: #172033; }
+      .label { font: 600 16px Arial, sans-serif; fill: #172033; text-anchor: middle; }
+      .small { font: 14px Arial, sans-serif; fill: #475569; text-anchor: middle; }
+      .box { fill: #eef4ff; stroke: #3563a6; stroke-width: 2; rx: 12; }
+      .decision { fill: #fff6df; stroke: #b7791f; stroke-width: 2; }
+      .queue { fill: #f3eefe; stroke: #7048a8; stroke-width: 2; rx: 12; }
+      .policy { fill: #e8f7ef; stroke: #238657; stroke-width: 2; rx: 12; }
+      .arrow { stroke: #475569; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <text x="500" y="32" class="title" text-anchor="middle">Science Park P2 quick-charging event flow</text>
+
+  <rect x="25" y="120" width="125" height="70" class="box"/>
+  <text x="87" y="150" class="label">Vehicle arrival</text>
+  <text x="87" y="174" class="small">Piecewise Poisson</text>
+
+  <polygon points="240,105 325,155 240,205 155,155" class="decision"/>
+  <text x="240" y="150" class="label">Charger</text>
+  <text x="240" y="174" class="label">available?</text>
+
+  <rect x="390" y="55" width="155" height="70" class="queue"/>
+  <text x="467" y="84" class="label">FCFS queue</text>
+  <text x="467" y="108" class="small">Wait for release</text>
+
+  <rect x="390" y="185" width="155" height="70" class="box"/>
+  <text x="467" y="214" class="label">Active charging</text>
+  <text x="467" y="238" class="small">Triangular duration</text>
+
+  <rect x="620" y="185" width="170" height="70" class="policy"/>
+  <text x="705" y="214" class="label">Post-charge dwell</text>
+  <text x="705" y="238" class="small">Policy-controlled input</text>
+
+  <rect x="850" y="185" width="120" height="70" class="box"/>
+  <text x="910" y="214" class="label">Departure</text>
+  <text x="910" y="238" class="small">Release charger</text>
+
+  <path d="M150 155 L155 155" class="arrow"/>
+  <path d="M325 155 L365 155 L365 220 L390 220" class="arrow"/>
+  <text x="354" y="145" class="small">Yes</text>
+  <path d="M240 105 L240 90 L390 90" class="arrow"/>
+  <text x="320" y="78" class="small">No</text>
+  <path d="M467 125 L467 185" class="arrow"/>
+  <text x="525" y="159" class="small">Next release</text>
+  <path d="M545 220 L620 220" class="arrow"/>
+  <path d="M790 220 L850 220" class="arrow"/>
+  <path d="M910 255 L910 315 L467 315 L467 255" class="arrow"/>
+  <text x="690" y="336" class="small">If queue non-empty, start the first waiting vehicle</text>
+
+  <text x="250" y="285" class="small">Waiting time = charging start time - arrival time</text>
+</svg>

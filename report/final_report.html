@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Science Park P2 EV Quick-Charger Simulation</title>
+<style>
+  @page { size: A4; margin: 17mm 18mm 15mm 18mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 10.4pt; line-height: 1.27; color: #172033; }
+  .page { height: 265mm; position: relative; page-break-after: always; overflow: hidden; }
+  .page:last-child { page-break-after: auto; }
+  .content { padding-bottom: 10mm; }
+  .footer { position: absolute; left: 0; right: 0; bottom: 0; border-top: 0.4pt solid #cbd5e1; padding-top: 2mm; font-size: 8.2pt; color: #64748b; display: flex; justify-content: space-between; }
+  h1 { margin: 0 0 3mm; font-size: 22pt; line-height: 1.08; color: #153d6f; }
+  h2 { margin: 0 0 2.4mm; font-size: 15pt; color: #153d6f; border-bottom: 1.2pt solid #84a7d3; padding-bottom: 1.3mm; }
+  h3 { margin: 3mm 0 1.5mm; font-size: 11.5pt; color: #24558d; }
+  p { margin: 0 0 2.5mm; }
+  ul, ol { margin: 1mm 0 2.5mm 5mm; padding-left: 4mm; }
+  li { margin-bottom: 1mm; }
+  .course { color: #64748b; font-size: 11pt; font-weight: 700; letter-spacing: 0.4px; margin-bottom: 6mm; }
+  .team { width: 100%; border-collapse: collapse; margin: 4mm 0 5mm; font-size: 9.6pt; }
+  .team td { border: 0; padding: 1.3mm 2mm; background: #f1f5f9; }
+  .team td:first-child { font-weight: 700; color: #153d6f; width: 34%; }
+  .question { border-left: 4px solid #3563a6; background: #eef4ff; padding: 3mm 4mm; margin: 3mm 0; font-weight: 700; }
+  .callout { background: #f7fafc; border: 0.6pt solid #cbd5e1; padding: 3mm 4mm; margin: 2.5mm 0; }
+  .green { background: #edf8f2; border-color: #8bc7a5; }
+  .amber { background: #fff8e8; border-color: #e4bd6b; }
+  table.data { width: 100%; border-collapse: collapse; margin: 2mm 0 3mm; font-size: 8.9pt; }
+  table.data th { background: #dbe8f7; color: #153d6f; text-align: left; font-weight: 700; }
+  table.data th, table.data td { border: 0.5pt solid #aebfd3; padding: 1.5mm 1.8mm; vertical-align: top; }
+  table.data tr:nth-child(even) td { background: #f8fafc; }
+  .num { text-align: right; white-space: nowrap; }
+  .figure { margin: 3mm auto 2mm; text-align: center; }
+  .figure img { max-width: 100%; display: block; margin: 0 auto; }
+  .figure.flow img { width: 168mm; }
+  .figure.chart img { width: 155mm; }
+  .caption { margin-top: 1.2mm; font-size: 8.5pt; color: #475569; }
+  .formula { text-align: center; font-family: Cambria, Georgia, serif; font-size: 11pt; margin: 3mm 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }
+  .stat { border-top: 4px solid #3563a6; padding: 2.5mm 2mm; background: #f8fafc; }
+  .stat.orange { border-color: #d97706; }
+  .stat.greenbar { border-color: #238657; }
+  .stat .big { font-size: 19pt; font-weight: 700; color: #153d6f; }
+  .stat .label { font-size: 8.8pt; color: #475569; }
+  .small { font-size: 8.7pt; color: #475569; }
+  .policy { font-size: 10pt; line-height: 1.32; background: #edf8f2; border: 1pt solid #7cbf9a; padding: 4mm; }
+  .refs { font-size: 8.8pt; line-height: 1.25; }
+  .refs li { margin-bottom: 2.2mm; }
+  .code { font-family: Consolas, monospace; font-size: 8.2pt; background: #f1f5f9; padding: 1mm 1.5mm; }
+  .tight p { margin-bottom: 1.8mm; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <div class="content">
+    <div class="course">SEEM3410 SYSTEM MODELING AND SIMULATION | 2026-27 TERM 1</div>
+    <h1>Reducing Waiting at Science Park P2 EV Quick Chargers</h1>
+    <p style="font-size:13pt;color:#475569;margin-bottom:4mm">A discrete-event simulation study of capacity and charge-and-go policies</p>
+    <table class="team">
+      <tr><td>Ngan Yuk Kuen</td><td>1155212758</td></tr>
+      <tr><td>Jundong Mei</td><td>1155174217</td></tr>
+      <tr><td>Zhiyuan Han</td><td>1155176066</td></tr>
+    </table>
+    <h2>1. System and Decision Problem</h2>
+    <p>Science Park Car Park P2 provides public electric-vehicle charging. The September 2026 Environmental Protection Department (EPD) database lists 26 quick chargers and one medium charger at P2. This project studies only the 26 quick chargers because combining charger classes would require power, connector and customer-choice data that are not publicly available.</p>
+    <div class="question">Under stochastic vehicle arrivals, which policy reduces mean vehicle waiting time more effectively: adding one quick charger or reducing post-charging occupation through a charge-and-go policy?</div>
+    <p>An EV starts immediately if a charger is free or joins one pooled first-come, first-served queue. The charger remains occupied during active charging and post-charging dwell. The boundary excludes general parking allocation, compatibility, abandonment, reservations, failures, prices and grid constraints.</p>
+    <div class="formula">Mean waiting = (1/n) sum [charging start time - arrival time]</div>
+    <div class="figure flow">
+      <img src="../figures/system_flow.png" alt="Science Park P2 charging event flow">
+      <div class="caption">Figure 1. Quick-charging customer flow and state-changing events.</div>
+    </div>
+  </div>
+  <div class="footer"><span>Science Park P2 EV Quick-Charger Simulation</span><span>1</span></div>
+</section>
+
+<section class="page">
+  <div class="content">
+    <h2>2. Data and Input Analysis</h2>
+    <p>The study distinguishes official site-specific data, external empirical references and synthetic assumptions. P2 transaction records are not publicly available. The HKSTP page confirms charging availability but gives no operational data. The EPD database supplies the site-specific count of 26 quick chargers. A Hong Kong transaction study supports three peak windows, but its observations are not treated as P2 arrivals.</p>
+    <table class="data">
+      <thead><tr><th>Input</th><th>Model and parameters</th><th>Units</th><th>Evidence status</th></tr></thead>
+      <tbody>
+        <tr><td>Quick chargers</td><td>Baseline 26; capacity policy 27</td><td>chargers</td><td>26 is official P2 data; 27 is a decision</td></tr>
+        <tr><td>Vehicle arrivals</td><td>Piecewise Poisson; planning rates 1.2-22.8</td><td>vehicles/hour</td><td>Synthetic rates; Hong Kong-informed peak timing</td></tr>
+        <tr><td>Active charging</td><td>Triangular(20, 45, 90), mean 51.67</td><td>minutes</td><td>Synthetic; anchored to technical guidance</td></tr>
+        <tr><td>Baseline dwell</td><td>Triangular(0, 10, 30), mean 13.33</td><td>minutes</td><td>Synthetic assumption</td></tr>
+        <tr><td>Charge-and-go dwell</td><td>Triangular(0, 2, 5), mean 2.33</td><td>minutes</td><td>Synthetic policy assumption</td></tr>
+      </tbody>
+    </table>
+    <h3>Piecewise arrival profile</h3>
+    <table class="data">
+      <thead><tr><th>Time</th><th>Planning rate</th><th>Planning target utilisation</th><th>Benchmark rate</th></tr></thead>
+      <tbody>
+        <tr><td>00:00-07:00</td><td class="num">1.2</td><td class="num">5%</td><td class="num">0.6</td></tr>
+        <tr><td>07:00-09:00</td><td class="num">19.2</td><td class="num">80%</td><td class="num">9.6</td></tr>
+        <tr><td>09:00-12:00</td><td class="num">4.8</td><td class="num">20%</td><td class="num">2.4</td></tr>
+        <tr><td>12:00-14:00</td><td class="num">20.4</td><td class="num">85%</td><td class="num">10.2</td></tr>
+        <tr><td>14:00-19:00</td><td class="num">6.0</td><td class="num">25%</td><td class="num">3.0</td></tr>
+        <tr><td>19:00-21:00</td><td class="num">22.8</td><td class="num">95%</td><td class="num">11.4</td></tr>
+        <tr><td>21:00-24:00</td><td class="num">4.8</td><td class="num">20%</td><td class="num">2.4</td></tr>
+      </tbody>
+    </table>
+    <div class="callout amber"><b>Interpretation.</b> The planning profile is a synthetic high-demand case with 192 expected arrivals/day. The benchmark halves every rate, gives 96 expected arrivals/day and produces 16.67% theoretical time-weighted utilisation, within the published Hong Kong-wide 10%-20% range. Neither profile is claimed to be measured P2 demand.</div>
+    <p class="small">Within each block, exponential interarrival times implement Poisson arrivals. Triangular distributions reflect the available bounds and most-likely values. The team fixed all assumptions before comparing policies.</p>
+  </div>
+  <div class="footer"><span>Data and input analysis</span><span>2</span></div>
+</section>
+
+<section class="page">
+  <div class="content">
+    <h2>3. Simulation Model and Python Implementation</h2>
+    <div class="two-col">
+      <div>
+        <h3>System state</h3>
+        <ul>
+          <li>Simulation clock and priority event calendar</li>
+          <li>Number of busy quick chargers</li>
+          <li>One FCFS queue of vehicle IDs</li>
+          <li>Arrival, charging and departure timestamps</li>
+        </ul>
+        <h3>Event logic</h3>
+        <ol>
+          <li><b>Arrival:</b> start service or join the queue.</li>
+          <li><b>Charging completion:</b> begin post-charge dwell while retaining the charger.</li>
+          <li><b>Departure:</b> release the charger and start the first queued vehicle.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Boundary treatment</h3>
+        <p>The initial system is empty. Every replication uses seven warm-up days followed by 30 measured days. Warm-up vehicles affect the state but do not enter the performance statistics.</p>
+        <p>Arrivals stop at the measurement boundary. The event calendar then drains, so every admitted measurement-period vehicle eventually starts service and contributes a waiting observation.</p>
+        <h3>Matched random inputs</h3>
+        <p>Corresponding vehicle IDs use the same arrival time, active-charging quantile and dwell quantile in each policy. This common-random-number design reduces noise in paired differences.</p>
+      </div>
+    </div>
+    <h3>Policy implementation</h3>
+    <table class="data">
+      <thead><tr><th>Scenario</th><th>Quick chargers</th><th>Dwell distribution</th><th>What remains fixed</th></tr></thead>
+      <tbody>
+        <tr><td>Baseline</td><td class="num">26</td><td>Triangular(0, 10, 30)</td><td>Reference</td></tr>
+        <tr><td>Capacity</td><td class="num">27</td><td>Triangular(0, 10, 30)</td><td>Arrival and charging inputs</td></tr>
+        <tr><td>Charge-and-go</td><td class="num">26</td><td>Triangular(0, 2, 5)</td><td>Arrival and charging inputs</td></tr>
+      </tbody>
+    </table>
+    <h3>Verification and validation</h3>
+    <p>Fifteen automated tests cover vehicle conservation, deterministic hand calculations, FCFS order, simultaneous events, zero demand, capacity, sensitivity scaling and seed reproducibility. A one-charger case with ten-minute service and arrivals at minutes 0, 2 and 4 returned the hand-calculated waits of 0, 8 and 16 minutes.</p>
+    <div class="three-col">
+      <div class="stat"><div class="big">15/15</div><div class="label">automated tests passed</div></div>
+      <div class="stat orange"><div class="big">192.388</div><div class="label">simulated mean arrivals vs 192 theoretical</div></div>
+      <div class="stat greenbar"><div class="big">16.751%</div><div class="label">120-day utilisation vs 16.667% target</div></div>
+    </div>
+    <div class="callout"><b>Validation status.</b> The implementation is verified and conclusions are valid conditional on the documented inputs. The model has not been calibrated against P2 arrival, charging-completion or departure timestamps.</div>
+  </div>
+  <div class="footer"><span>Simulation model and implementation</span><span>3</span></div>
+</section>
+
+<section class="page">
+  <div class="content">
+    <h2>4. Experiment Design</h2>
+    <table class="data">
+      <thead><tr><th>Design item</th><th>Adopted value</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>Replications</td><td>100 per profile and scenario</td><td>Estimate policy means and paired differences</td></tr>
+        <tr><td>Warm-up / measurement</td><td>7 / 30 days</td><td>Remove empty-start bias and average daily cycles</td></tr>
+        <tr><td>Confidence level</td><td>95% Student-t intervals</td><td>Quantify simulation uncertainty</td></tr>
+        <tr><td>Variance reduction</td><td>Vehicle-level common random numbers</td><td>Preserve matched stochastic inputs</td></tr>
+        <tr><td>Demand cases</td><td>Planning and current benchmark</td><td>Separate high-load planning from present-context evidence</td></tr>
+      </tbody>
+    </table>
+    <h2 style="margin-top:4mm">5. Results and Discussion</h2>
+    <div class="figure chart">
+      <img src="../figures/policy_waiting_time.png" alt="Mean waiting time for baseline, capacity and charge-and-go">
+      <div class="caption">Figure 2. Planning-profile mean waiting time and 95% confidence intervals.</div>
+    </div>
+    <table class="data">
+      <thead><tr><th>Scenario</th><th>Mean wait (minutes)</th><th>95% CI</th><th>Mean utilisation</th></tr></thead>
+      <tbody>
+        <tr><td>Baseline</td><td class="num">0.8329</td><td class="num">[0.7942, 0.8716]</td><td class="num">33.35%</td></tr>
+        <tr><td>Capacity</td><td class="num">0.5774</td><td class="num">[0.5460, 0.6088]</td><td class="num">32.12%</td></tr>
+        <tr><td>Charge-and-go</td><td class="num">0.1523</td><td class="num">[0.1385, 0.1660]</td><td class="num">27.71%</td></tr>
+      </tbody>
+    </table>
+    <div class="callout green"><b>Main result.</b> Capacity reduces mean waiting by 0.2555 minutes, or 30.68%, with paired 95% CI [0.2474, 0.2636]. Charge-and-go reduces it by 0.6807 minutes, or 81.72%, with paired 95% CI [0.6539, 0.7074]. Both paired intervals exclude zero.</div>
+    <p class="small">All planning-profile primary interval half-widths are below 5% of their means, so the approved 100 replications provide adequate precision.</p>
+  </div>
+  <div class="footer"><span>Experiment design and main results</span><span>4</span></div>
+</section>
+
+<section class="page">
+  <div class="content tight">
+    <h2>5. Results and Discussion - Demand Context</h2>
+    <h3>Current benchmark</h3>
+    <p>The benchmark represents 16.67% theoretical time-weighted utilisation. Baseline waiting is already practically zero. The paired intervals for both improvements contain zero, so neither policy has a meaningful waiting-time justification at this demand level.</p>
+    <table class="data">
+      <thead><tr><th>Scenario</th><th>Mean wait (minutes)</th><th>Approx. seconds</th><th>95% CI (minutes)</th></tr></thead>
+      <tbody>
+        <tr><td>Baseline</td><td class="num">0.000319</td><td class="num">0.0191</td><td class="num">[-0.000050, 0.000688]</td></tr>
+        <tr><td>Capacity</td><td class="num">0.000098</td><td class="num">0.0059</td><td class="num">[-0.000047, 0.000244]</td></tr>
+        <tr><td>Charge-and-go</td><td class="num">0.000000</td><td class="num">0.0000</td><td class="num">[0.000000, 0.000000]</td></tr>
+      </tbody>
+    </table>
+    <p class="small">Negative lower endpoints result from symmetric Student-t intervals. Physical waiting time cannot be negative. Percentage changes are suppressed because division by an almost-zero baseline would mislead.</p>
+    <h3>Operating mechanism</h3>
+    <div class="two-col">
+      <div class="callout">
+        <b>Capacity policy</b>
+        <p>Adds one parallel server. Once installed, operation remains simple. The policy requires one charging unit, a parking space, electrical capacity and capital expenditure.</p>
+      </div>
+      <div class="callout green">
+        <b>Charge-and-go</b>
+        <p>Reduces occupation after every session. The policy uses current infrastructure but requires completion notifications, clear rules, enforcement and driver compliance.</p>
+      </div>
+    </div>
+    <h3>Decision interpretation</h3>
+    <p>Charge-and-go produces the larger planning-profile reduction because it releases capacity after every charging session. Capacity adds only one server, increasing nominal server count by 3.85%. This result does not establish a financial preference because the project lacks installation, enforcement and customer-acceptance cost data.</p>
+    <div class="callout amber"><b>Demand-dependent decision.</b> Under the current benchmark, retain the 26-charger system because waiting is negligible. If observed P2 peak congestion resembles the planning case, test charge-and-go before investing in another charger.</div>
+    <h3>Practical limitations</h3>
+    <ul>
+      <li>The P2 charger count is observed, but demand, charging and dwell distributions are synthetic.</li>
+      <li>The model omits abandonment, connector compatibility, failures, reservations, pricing and power sharing.</li>
+      <li>Mean waiting time is the only primary measure; the analysis does not monetize cost or customer inconvenience.</li>
+    </ul>
+  </div>
+  <div class="footer"><span>Demand context and operating trade-offs</span><span>5</span></div>
+</section>
+
+<section class="page">
+  <div class="content">
+    <h2>6. Sensitivity Analysis</h2>
+    <p>A one-factor-at-a-time design uses 50 paired replications per unique setting. It tests demand multipliers 0.50-1.20, active-charging scales 0.80-1.20, baseline-dwell scales 0.50-2.00 and charge-and-go dwell scales 1.00-3.00. Differences below 0.01 minute count as practical ties.</p>
+    <div class="figure chart">
+      <img src="../figures/demand_sensitivity.png" alt="Mean waiting time by demand multiplier">
+      <div class="caption">Figure 3. Mean waiting time rises nonlinearly as demand approaches peak capacity.</div>
+    </div>
+    <table class="data">
+      <thead><tr><th>Sensitivity check</th><th>Capacity wait</th><th>Charge-and-go wait</th><th>Interpretation</th></tr></thead>
+      <tbody>
+        <tr><td>0.50 demand</td><td class="num">0.0000</td><td class="num">0.0000</td><td>Practical tie</td></tr>
+        <tr><td>1.20 demand</td><td class="num">2.3657</td><td class="num">0.8467</td><td>Charge-and-go lower</td></tr>
+        <tr><td>0.50 baseline dwell</td><td class="num">0.2186</td><td class="num">0.1607</td><td>Advantage narrows to 0.0579 min</td></tr>
+        <tr><td>3.00 policy dwell</td><td class="num">0.5745</td><td class="num">0.3498</td><td>Charge-and-go still lower</td></tr>
+      </tbody>
+    </table>
+    <div class="callout green"><b>Robustness result.</b> Charge-and-go has lower waiting in 11 of 12 unique settings. Capacity wins in zero settings. The low-demand case is a practical tie.</div>
+    <p>Baseline dwell time is the most important uncertainty for the size of the charge-and-go advantage. One-factor analysis does not test every interaction. The ranking remains conditional on the tested ranges.</p>
+  </div>
+  <div class="footer"><span>Sensitivity analysis</span><span>6</span></div>
+</section>
+
+<section class="page">
+  <div class="content">
+    <h2>7. Recommendations and Policy Brief</h2>
+    <div class="policy"><b>Policy brief (197 words).</b> Science Park P2 should retain its current 26 quick chargers under demand consistent with the published Hong Kong-wide utilisation benchmark, because simulated baseline waiting is already practically zero and neither improvement produces a statistically or operationally meaningful benefit. If P2 instead experiences the high-demand planning conditions represented in this study, it should pilot a charge-and-go policy before installing an additional charger. Under those assumptions, charge-and-go reduces mean waiting from 0.833 to 0.152 minutes, an estimated 81.7% reduction, compared with 30.7% from adding one charger. The mechanism is efficient turnover: reducing post-charge occupation releases capacity after every session, while the capacity policy adds only one server. A pilot could combine automatic completion notifications, clear signage, a short grace period and an overstay rule. Its resource requirement is primarily operating and enforcement effort, whereas capacity expansion requires equipment, space, power and capital. This recommendation applies only when post-charge dwell and peak demand are materially present. P2-specific transaction data are currently unavailable, and both arrival rates and dwell distributions are synthetic. The operator should first collect anonymised arrival, charging-completion and departure timestamps, then update the simulation and confirm the benefit before permanent enforcement or infrastructure spending.</div>
+    <h3>Suggested pilot and data plan</h3>
+    <table class="data">
+      <thead><tr><th>Stage</th><th>Action</th><th>Evidence required</th></tr></thead>
+      <tbody>
+        <tr><td>1. Observe</td><td>Collect anonymised timestamps without changing operations.</td><td>Arrival, charging start, completion and departure</td></tr>
+        <tr><td>2. Recalibrate</td><td>Fit the arrival, charging and dwell inputs and rerun the paired experiment.</td><td>Distribution fit and revised confidence intervals</td></tr>
+        <tr><td>3. Pilot</td><td>Test completion notifications and a short grace period during peak hours.</td><td>Compliance, realised dwell and customer feedback</td></tr>
+        <tr><td>4. Decide</td><td>Compare the pilot with capacity cost and electrical feasibility.</td><td>Waiting reduction, operating cost and installation cost</td></tr>
+      </tbody>
+    </table>
+    <div class="callout amber"><b>Decision threshold.</b> Do not expand capacity to address waiting while observed P2 waiting remains negligible. Reconsider intervention when site-specific peak data show recurring queues and material post-charge occupation.</div>
+    <h3>Principal limitation</h3>
+    <p>The recommendation compares operational effectiveness under explicit assumptions. It does not claim that the planning profile describes current P2 operations. Transaction-level site data may change both the scale of the benefit and the preferred policy.</p>
+  </div>
+  <div class="footer"><span>Recommendation and policy brief</span><span>7</span></div>
+</section>
+
+<section class="page">
+  <div class="content">
+    <h2>References and Reproducibility</h2>
+    <ol class="refs">
+      <li>Environmental Protection Department. <i>Locations of EV Chargers for Public Access</i>, September 2026. https://www.epd.gov.hk/epd/tc_chi/environmentinhk/air/promotion_ev/locations_ev_chargers.html</li>
+      <li>Hong Kong Science and Technology Parks Corporation. <i>Parking</i>. https://www.hkstp.org/zh-hk/visit/parking</li>
+      <li>Electrical and Mechanical Services Department. <i>Technical Guidelines on Charging Facilities for Electric Vehicles</i>. https://www.emsd.gov.hk/filemanager/en/content_2/EV_guidelines.pdf</li>
+      <li>Hong Kong SAR Government. <i>LCQ16: Improving charging efficiency of public charging facilities</i>, 28 October 2026. https://www.info.gov.hk/gia/general/202610/28/P2026102800314p.htm</li>
+      <li>Hong Kong University of Science and Technology. <i>Short-term Load Forecasting of Electric Vehicle Charging Stations in Hong Kong</i>, using 2022 public-charging transactions. https://repository.hkust.edu.hk/ir/bitstream/1783.1-152584/1/1783.1-152584.pdf</li>
+    </ol>
+    <h3>Reproducibility package</h3>
+    <p>The separate ZIP package contains the Python source, input configuration, automated tests, exact result summaries and run instructions. The simulation uses only the Python standard library.</p>
+    <table class="data">
+      <thead><tr><th>Purpose</th><th>Command</th></tr></thead>
+      <tbody>
+        <tr><td>Run all tests</td><td class="code">python -m unittest discover -s tests -v</td></tr>
+        <tr><td>Validate inputs</td><td class="code">python -m src.validate_model</td></tr>
+        <tr><td>Formal experiment</td><td class="code">python -m src.run_experiment --replications 100 --warmup-days 7 --measurement-days 30 --base-seed 341000</td></tr>
+        <tr><td>Sensitivity analysis</td><td class="code">python -m src.run_sensitivity --replications 50 --warmup-days 7 --measurement-days 30 --base-seed 841000</td></tr>
+      </tbody>
+    </table>
+    <h3>Files supporting the reported evidence</h3>
+    <ul>
+      <li><span class="code">config/model_inputs.json</span> stores every approved model parameter.</li>
+      <li><span class="code">results/experiment_summary.json</span> stores the 100-replication comparison.</li>
+      <li><span class="code">results/sensitivity_summary.json</span> stores the one-factor sensitivity results.</li>
+      <li><span class="code">README.md</span> records the task history and complete run instructions.</li>
+    </ul>
+    <div class="callout"><b>Final interpretation.</b> The model supports charge-and-go as the preferred high-demand policy within the tested assumptions. It also shows that no waiting-time intervention is necessary under the lower benchmark. P2 operational data remain essential before permanent action.</div>
+  </div>
+  <div class="footer"><span>References and reproducibility</span><span>8</span></div>
+</section>
+
+</body>
+</html>

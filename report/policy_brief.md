@@ -1,0 +1,7 @@
+# Policy Brief: Science Park P2 Quick-Charger Operations
+
+Science Park P2 should retain its current 26 quick chargers under demand consistent with the published Hong Kong-wide utilisation benchmark, because simulated baseline waiting is already practically zero and neither improvement produces a statistically or operationally meaningful benefit. If P2 instead experiences the high-demand planning conditions represented in this study, it should pilot a charge-and-go policy before installing an additional charger.
+
+Under those assumptions, charge-and-go reduces mean waiting from 0.833 to 0.152 minutes, an estimated 81.7% reduction, compared with 30.7% from adding one charger. The mechanism is efficient turnover: reducing post-charge occupation releases capacity after every session, while the capacity policy adds only one server. A pilot could combine automatic completion notifications, clear signage, a short grace period and an overstay rule. Its resource requirement is primarily operating and enforcement effort, whereas capacity expansion requires equipment, space, power and capital.
+
+This recommendation applies only when post-charge dwell and peak demand are materially present. P2-specific transaction data are currently unavailable, and both arrival rates and dwell distributions are synthetic. The operator should first collect anonymised arrival, charging-completion and departure timestamps, then update the simulation and confirm the benefit before permanent enforcement or infrastructure spending.

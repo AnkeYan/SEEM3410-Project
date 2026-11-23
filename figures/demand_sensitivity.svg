@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+  <defs>
+    <style>
+      .title { font: 700 22px Arial, sans-serif; fill: #172033; }
+      .axis { stroke: #334155; stroke-width: 2; }
+      .grid { stroke: #d8dee9; stroke-width: 1; }
+      .tick { font: 14px Arial, sans-serif; fill: #475569; }
+      .label { font: 600 15px Arial, sans-serif; fill: #172033; text-anchor: middle; }
+      .legend { font: 14px Arial, sans-serif; fill: #334155; }
+      .note { font: 13px Arial, sans-serif; fill: #64748b; text-anchor: middle; }
+    </style>
+  </defs>
+  <text x="450" y="30" class="title" text-anchor="middle">Demand sensitivity of mean waiting time</text>
+  <text x="450" y="52" class="note">Planning arrival rates multiplied by the stated factor</text>
+
+  <line x1="90" y1="400" x2="850" y2="400" class="axis"/>
+  <line x1="90" y1="60" x2="90" y2="400" class="axis"/>
+  <g>
+    <line x1="90" y1="400" x2="850" y2="400" class="grid"/><text x="78" y="405" class="tick" text-anchor="end">0.0</text>
+    <line x1="90" y1="351.4" x2="850" y2="351.4" class="grid"/><text x="78" y="356" class="tick" text-anchor="end">0.5</text>
+    <line x1="90" y1="302.9" x2="850" y2="302.9" class="grid"/><text x="78" y="308" class="tick" text-anchor="end">1.0</text>
+    <line x1="90" y1="254.3" x2="850" y2="254.3" class="grid"/><text x="78" y="259" class="tick" text-anchor="end">1.5</text>
+    <line x1="90" y1="205.7" x2="850" y2="205.7" class="grid"/><text x="78" y="211" class="tick" text-anchor="end">2.0</text>
+    <line x1="90" y1="157.1" x2="850" y2="157.1" class="grid"/><text x="78" y="162" class="tick" text-anchor="end">2.5</text>
+    <line x1="90" y1="108.6" x2="850" y2="108.6" class="grid"/><text x="78" y="113" class="tick" text-anchor="end">3.0</text>
+    <line x1="90" y1="60" x2="850" y2="60" class="grid"/><text x="78" y="65" class="tick" text-anchor="end">3.5</text>
+  </g>
+  <text x="24" y="230" class="label" transform="rotate(-90 24 230)">Mean waiting time (minutes)</text>
+
+  <g class="tick" text-anchor="middle">
+    <text x="130" y="425">0.50</text><text x="310" y="425">0.75</text><text x="490" y="425">1.00</text><text x="670" y="425">1.10</text><text x="830" y="425">1.20</text>
+  </g>
+  <text x="480" y="458" class="label">Demand multiplier</text>
+
+  <polyline points="130,399.99 310,395.0 490,320.1 670,237.4 830,100.3" fill="none" stroke="#3563a6" stroke-width="4"/>
+  <polyline points="130,400.0 310,397.1 490,344.2 670,281.0 830,170.2" fill="none" stroke="#d97706" stroke-width="4"/>
+  <polyline points="130,400.0 310,399.5 490,384.4 670,363.6 830,317.8" fill="none" stroke="#238657" stroke-width="4"/>
+
+  <g fill="#3563a6"><circle cx="130" cy="399.99" r="5"/><circle cx="310" cy="395.0" r="5"/><circle cx="490" cy="320.1" r="5"/><circle cx="670" cy="237.4" r="5"/><circle cx="830" cy="100.3" r="5"/></g>
+  <g fill="#d97706"><circle cx="130" cy="400.0" r="5"/><circle cx="310" cy="397.1" r="5"/><circle cx="490" cy="344.2" r="5"/><circle cx="670" cy="281.0" r="5"/><circle cx="830" cy="170.2" r="5"/></g>
+  <g fill="#238657"><circle cx="130" cy="400.0" r="5"/><circle cx="310" cy="399.5" r="5"/><circle cx="490" cy="384.4" r="5"/><circle cx="670" cy="363.6" r="5"/><circle cx="830" cy="317.8" r="5"/></g>
+
+  <line x1="125" y1="482" x2="165" y2="482" stroke="#3563a6" stroke-width="4"/><text x="175" y="487" class="legend">Baseline</text>
+  <line x1="350" y1="482" x2="390" y2="482" stroke="#d97706" stroke-width="4"/><text x="400" y="487" class="legend">Capacity</text>
+  <line x1="580" y1="482" x2="620" y2="482" stroke="#238657" stroke-width="4"/><text x="630" y="487" class="legend">Charge-and-go</text>
+</svg>

@@ -1,0 +1,149 @@
+{
+  "design": {
+    "method": "one_factor_at_a_time",
+    "profile": "planning",
+    "replications_per_setting": 50,
+    "warmup_days": 7,
+    "measurement_days": 30,
+    "base_seed": 841000,
+    "common_random_numbers": true,
+    "unique_settings": 12,
+    "practical_tie_threshold_minutes": 0.01
+  },
+  "factors": {
+    "demand_multiplier": [
+      {
+        "level": 0.5,
+        "baseline_mean_wait": 0.00013902771354720918,
+        "capacity_mean_wait": 0.00002431425761063689,
+        "charge_and_go_mean_wait": 0.0,
+        "charge_and_go_advantage_over_capacity": 0.00002431425761063689,
+        "classification": "practical_tie"
+      },
+      {
+        "level": 0.75,
+        "baseline_mean_wait": 0.05143154819865036,
+        "capacity_mean_wait": 0.029446403314919413,
+        "charge_and_go_mean_wait": 0.005231254085724157,
+        "charge_and_go_advantage_over_capacity": 0.024215149229195255,
+        "classification": "charge_and_go"
+      },
+      {
+        "level": 1.0,
+        "baseline_mean_wait": 0.8220734217982032,
+        "capacity_mean_wait": 0.5744532031107173,
+        "charge_and_go_mean_wait": 0.16066492668777335,
+        "charge_and_go_advantage_over_capacity": 0.413788276422944,
+        "classification": "charge_and_go"
+      },
+      {
+        "level": 1.1,
+        "baseline_mean_wait": 1.6739237485976273,
+        "capacity_mean_wait": 1.2250098429851202,
+        "charge_and_go_mean_wait": 0.37478150907910696,
+        "charge_and_go_advantage_over_capacity": 0.8502283339060133,
+        "classification": "charge_and_go"
+      },
+      {
+        "level": 1.2,
+        "baseline_mean_wait": 3.0853725968891608,
+        "capacity_mean_wait": 2.3657075626072226,
+        "charge_and_go_mean_wait": 0.846696969538202,
+        "charge_and_go_advantage_over_capacity": 1.5190105930690208,
+        "classification": "charge_and_go"
+      }
+    ],
+    "charging_time_scale": [
+      {
+        "level": 0.8,
+        "baseline_mean_wait": 0.18509546067403945,
+        "capacity_mean_wait": 0.11730974528053144,
+        "charge_and_go_mean_wait": 0.015709099109669694,
+        "charge_and_go_advantage_over_capacity": 0.10160064617086174,
+        "classification": "charge_and_go"
+      },
+      {
+        "level": 1.0,
+        "baseline_mean_wait": 0.8220734217982032,
+        "capacity_mean_wait": 0.5744532031107173,
+        "charge_and_go_mean_wait": 0.16066492668777335,
+        "charge_and_go_advantage_over_capacity": 0.413788276422944,
+        "classification": "charge_and_go"
+      },
+      {
+        "level": 1.2,
+        "baseline_mean_wait": 2.2628770607618502,
+        "capacity_mean_wait": 1.699493537367314,
+        "charge_and_go_mean_wait": 0.7402301798459517,
+        "charge_and_go_advantage_over_capacity": 0.9592633575213622,
+        "classification": "charge_and_go"
+      }
+    ],
+    "baseline_dwell_scale": [
+      {
+        "level": 0.5,
+        "baseline_mean_wait": 0.3323417126032303,
+        "capacity_mean_wait": 0.21858260921966316,
+        "charge_and_go_mean_wait": 0.16066492668777335,
+        "charge_and_go_advantage_over_capacity": 0.05791768253188981,
+        "classification": "charge_and_go"
+      },
+      {
+        "level": 1.0,
+        "baseline_mean_wait": 0.8220734217982032,
+        "capacity_mean_wait": 0.5744532031107173,
+        "charge_and_go_mean_wait": 0.16066492668777335,
+        "charge_and_go_advantage_over_capacity": 0.413788276422944,
+        "classification": "charge_and_go"
+      },
+      {
+        "level": 1.5,
+        "baseline_mean_wait": 1.6559680281224332,
+        "capacity_mean_wait": 1.2154039307641233,
+        "charge_and_go_mean_wait": 0.16066492668777335,
+        "charge_and_go_advantage_over_capacity": 1.05473900407635,
+        "classification": "charge_and_go"
+      },
+      {
+        "level": 2.0,
+        "baseline_mean_wait": 2.859757253772172,
+        "capacity_mean_wait": 2.1878534686788496,
+        "charge_and_go_mean_wait": 0.16066492668777335,
+        "charge_and_go_advantage_over_capacity": 2.0271885419910762,
+        "classification": "charge_and_go"
+      }
+    ],
+    "policy_dwell_scale": [
+      {
+        "level": 1.0,
+        "baseline_mean_wait": 0.8220734217982032,
+        "capacity_mean_wait": 0.5744532031107173,
+        "charge_and_go_mean_wait": 0.16066492668777335,
+        "charge_and_go_advantage_over_capacity": 0.413788276422944,
+        "classification": "charge_and_go"
+      },
+      {
+        "level": 2.0,
+        "baseline_mean_wait": 0.8220734217982032,
+        "capacity_mean_wait": 0.5744532031107173,
+        "charge_and_go_mean_wait": 0.24149066234333932,
+        "charge_and_go_advantage_over_capacity": 0.332962540767378,
+        "classification": "charge_and_go"
+      },
+      {
+        "level": 3.0,
+        "baseline_mean_wait": 0.8220734217982032,
+        "capacity_mean_wait": 0.5744532031107173,
+        "charge_and_go_mean_wait": 0.3498472950356471,
+        "charge_and_go_advantage_over_capacity": 0.22460590807507025,
+        "classification": "charge_and_go"
+      }
+    ]
+  },
+  "robustness_summary": {
+    "unique_settings_evaluated": 12,
+    "settings_where_charge_and_go_has_lower_wait_than_capacity": 11,
+    "settings_where_capacity_has_lower_wait_than_charge_and_go": 0,
+    "settings_with_practical_tie": 1
+  }
+}

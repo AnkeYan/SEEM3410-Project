@@ -1,0 +1,118 @@
+{
+  "metadata": {
+    "project": "SEEM3410 Team Project",
+    "model": "Science Park P2 quick-charging subsystem",
+    "version": "1.0",
+    "approved_date": "2026-11-23",
+    "time_unit": "minutes"
+  },
+  "resources": {
+    "baseline_quick_chargers": 26,
+    "capacity_policy_quick_chargers": 27,
+    "source_status": "official_site_specific_data"
+  },
+  "arrival_process": {
+    "type": "piecewise_homogeneous_poisson",
+    "interarrival_distribution_within_period": "exponential",
+    "planning_profile": [
+      {
+        "start_hour": 0,
+        "end_hour": 7,
+        "label": "overnight",
+        "target_utilisation": 0.05,
+        "arrival_rate_vehicles_per_hour": 1.2
+      },
+      {
+        "start_hour": 7,
+        "end_hour": 9,
+        "label": "morning_peak",
+        "target_utilisation": 0.8,
+        "arrival_rate_vehicles_per_hour": 19.2
+      },
+      {
+        "start_hour": 9,
+        "end_hour": 12,
+        "label": "morning_shoulder",
+        "target_utilisation": 0.2,
+        "arrival_rate_vehicles_per_hour": 4.8
+      },
+      {
+        "start_hour": 12,
+        "end_hour": 14,
+        "label": "midday_peak",
+        "target_utilisation": 0.85,
+        "arrival_rate_vehicles_per_hour": 20.4
+      },
+      {
+        "start_hour": 14,
+        "end_hour": 19,
+        "label": "afternoon_shoulder",
+        "target_utilisation": 0.25,
+        "arrival_rate_vehicles_per_hour": 6.0
+      },
+      {
+        "start_hour": 19,
+        "end_hour": 21,
+        "label": "evening_peak",
+        "target_utilisation": 0.95,
+        "arrival_rate_vehicles_per_hour": 22.8
+      },
+      {
+        "start_hour": 21,
+        "end_hour": 24,
+        "label": "late_evening",
+        "target_utilisation": 0.2,
+        "arrival_rate_vehicles_per_hour": 4.8
+      }
+    ],
+    "expected_planning_arrivals_per_day": 192.0,
+    "planning_profile_time_weighted_utilisation": 0.3333333333,
+    "current_benchmark_multiplier": 0.5,
+    "expected_current_benchmark_arrivals_per_day": 96.0,
+    "current_benchmark_time_weighted_utilisation": 0.1666666667,
+    "source_status": "synthetic_rates_informed_by_hong_kong_peak_periods_and_official_utilisation_benchmark"
+  },
+  "active_charging_time": {
+    "distribution": "triangular",
+    "minimum_minutes": 20.0,
+    "mode_minutes": 45.0,
+    "maximum_minutes": 90.0,
+    "theoretical_mean_minutes": 51.6666666667,
+    "source_status": "synthetic_assumption_anchored_to_official_hong_kong_technical_guidance"
+  },
+  "post_charging_dwell_time": {
+    "baseline": {
+      "distribution": "triangular",
+      "minimum_minutes": 0.0,
+      "mode_minutes": 10.0,
+      "maximum_minutes": 30.0,
+      "theoretical_mean_minutes": 13.3333333333,
+      "source_status": "synthetic_assumption"
+    },
+    "charge_and_go_policy": {
+      "distribution": "triangular",
+      "minimum_minutes": 0.0,
+      "mode_minutes": 2.0,
+      "maximum_minutes": 5.0,
+      "theoretical_mean_minutes": 2.3333333333,
+      "source_status": "synthetic_policy_assumption"
+    }
+  },
+  "derived_values": {
+    "baseline_mean_charger_occupation_minutes": 65.0,
+    "charge_and_go_mean_charger_occupation_minutes": 54.0,
+    "baseline_nominal_service_capacity_vehicles_per_hour": 24.0,
+    "charge_and_go_nominal_service_capacity_vehicles_per_hour": 28.8888888889
+  },
+  "output_measures": {
+    "primary": [
+      "mean_vehicle_waiting_time_minutes"
+    ],
+    "diagnostic_only": [
+      "charger_utilisation",
+      "time_average_queue_length",
+      "maximum_queue_length",
+      "vehicles_served"
+    ]
+  }
+}

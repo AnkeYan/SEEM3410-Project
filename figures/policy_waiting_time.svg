@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+  <defs>
+    <style>
+      .title { font: 700 22px Arial, sans-serif; fill: #172033; }
+      .axis { stroke: #334155; stroke-width: 2; }
+      .grid { stroke: #d8dee9; stroke-width: 1; }
+      .tick { font: 14px Arial, sans-serif; fill: #475569; }
+      .label { font: 600 15px Arial, sans-serif; fill: #172033; text-anchor: middle; }
+      .value { font: 700 15px Arial, sans-serif; fill: #172033; text-anchor: middle; }
+      .note { font: 13px Arial, sans-serif; fill: #64748b; text-anchor: middle; }
+      .ci { stroke: #172033; stroke-width: 2; }
+    </style>
+  </defs>
+  <text x="450" y="30" class="title" text-anchor="middle">Planning-profile mean vehicle waiting time</text>
+  <text x="450" y="52" class="note">Bars show replication means; whiskers show 95% confidence intervals</text>
+
+  <line x1="90" y1="390" x2="850" y2="390" class="axis"/>
+  <line x1="90" y1="60" x2="90" y2="390" class="axis"/>
+
+  <g>
+    <line x1="90" y1="390" x2="850" y2="390" class="grid"/><text x="78" y="395" class="tick" text-anchor="end">0.0</text>
+    <line x1="90" y1="324" x2="850" y2="324" class="grid"/><text x="78" y="329" class="tick" text-anchor="end">0.2</text>
+    <line x1="90" y1="258" x2="850" y2="258" class="grid"/><text x="78" y="263" class="tick" text-anchor="end">0.4</text>
+    <line x1="90" y1="192" x2="850" y2="192" class="grid"/><text x="78" y="197" class="tick" text-anchor="end">0.6</text>
+    <line x1="90" y1="126" x2="850" y2="126" class="grid"/><text x="78" y="131" class="tick" text-anchor="end">0.8</text>
+    <line x1="90" y1="60" x2="850" y2="60" class="grid"/><text x="78" y="65" class="tick" text-anchor="end">1.0</text>
+  </g>
+  <text x="24" y="225" class="label" transform="rotate(-90 24 225)">Mean waiting time (minutes)</text>
+
+  <rect x="160" y="115.1" width="140" height="274.9" fill="#3563a6" rx="5"/>
+  <line x1="230" y1="102.4" x2="230" y2="128.0" class="ci"/>
+  <line x1="215" y1="102.4" x2="245" y2="102.4" class="ci"/>
+  <line x1="215" y1="128.0" x2="245" y2="128.0" class="ci"/>
+  <text x="230" y="90" class="value">0.833</text>
+
+  <rect x="380" y="199.5" width="140" height="190.5" fill="#d97706" rx="5"/>
+  <line x1="450" y1="189.0" x2="450" y2="209.8" class="ci"/>
+  <line x1="435" y1="189.0" x2="465" y2="189.0" class="ci"/>
+  <line x1="435" y1="209.8" x2="465" y2="209.8" class="ci"/>
+  <text x="450" y="176" class="value">0.577</text>
+
+  <rect x="600" y="339.8" width="140" height="50.2" fill="#238657" rx="5"/>
+  <line x1="670" y1="335.2" x2="670" y2="344.3" class="ci"/>
+  <line x1="655" y1="335.2" x2="685" y2="335.2" class="ci"/>
+  <line x1="655" y1="344.3" x2="685" y2="344.3" class="ci"/>
+  <text x="670" y="322" class="value">0.152</text>
+
+  <text x="230" y="420" class="label">Baseline</text>
+  <text x="230" y="442" class="note">26 chargers</text>
+  <text x="450" y="420" class="label">Capacity</text>
+  <text x="450" y="442" class="note">27 chargers</text>
+  <text x="670" y="420" class="label">Charge-and-go</text>
+  <text x="670" y="442" class="note">26 chargers</text>
+
+  <text x="450" y="485" class="note">100 paired replications; 7-day warm-up and 30-day measurement period</text>
+</svg>

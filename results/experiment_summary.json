@@ -1,0 +1,169 @@
+{
+  "design": {
+    "replications": 100,
+    "warmup_days": 7,
+    "measurement_days": 30,
+    "confidence_level": 0.95,
+    "base_seed": 341000,
+    "profiles": ["planning", "current_benchmark"],
+    "scenarios": ["baseline", "capacity", "charge_and_go"],
+    "common_random_numbers": true,
+    "primary_measure": "mean_vehicle_waiting_time_minutes"
+  },
+  "profiles": {
+    "planning": {
+      "scenario_summaries": {
+        "baseline": {
+          "mean_waiting_time_minutes": {
+            "replications": 100,
+            "mean": 0.832911750423451,
+            "sample_standard_deviation": 0.19512901659159965,
+            "standard_error": 0.019512901659159965,
+            "ci_95_lower": 0.7941939205011112,
+            "ci_95_upper": 0.8716295803457909,
+            "ci_95_half_width": 0.03871782992233984
+          },
+          "mean_charger_utilisation": 0.33354480616139276,
+          "mean_time_average_queue_length": 0.11133218205472295,
+          "mean_maximum_queue_length": 13.66,
+          "mean_measured_arrivals": 5765.77
+        },
+        "capacity": {
+          "mean_waiting_time_minutes": {
+            "replications": 100,
+            "mean": 0.5774082191181895,
+            "sample_standard_deviation": 0.1581511440624363,
+            "standard_error": 0.01581511440624363,
+            "ci_95_lower": 0.5460276012849703,
+            "ci_95_upper": 0.6087888369514087,
+            "ci_95_half_width": 0.03138061783321919
+          },
+          "mean_charger_utilisation": 0.32119129482208186,
+          "mean_time_average_queue_length": 0.0771921914248166,
+          "mean_maximum_queue_length": 12.52,
+          "mean_measured_arrivals": 5765.77
+        },
+        "charge_and_go": {
+          "mean_waiting_time_minutes": {
+            "replications": 100,
+            "mean": 0.1522597923316645,
+            "sample_standard_deviation": 0.06934558407265078,
+            "standard_error": 0.006934558407265078,
+            "ci_95_lower": 0.1385001241034908,
+            "ci_95_upper": 0.1660194605598382,
+            "ci_95_half_width": 0.013759668228173693
+          },
+          "mean_charger_utilisation": 0.2771114070568555,
+          "mean_time_average_queue_length": 0.020362758302315435,
+          "mean_maximum_queue_length": 8.61,
+          "mean_measured_arrivals": 5765.77
+        }
+      },
+      "paired_comparisons": {
+        "capacity": {
+          "paired_waiting_time_reduction_minutes": {
+            "replications": 100,
+            "mean": 0.2555035313052615,
+            "sample_standard_deviation": 0.04091512572718866,
+            "standard_error": 0.004091512572718866,
+            "ci_95_lower": 0.2473850827688656,
+            "ci_95_upper": 0.26362197984165736,
+            "ci_95_half_width": 0.00811844853639589
+          },
+          "reduction_percentage_of_baseline_mean": 30.675942700455828,
+          "replications_with_nonnegative_reduction": 100
+        },
+        "charge_and_go": {
+          "paired_waiting_time_reduction_minutes": {
+            "replications": 100,
+            "mean": 0.6806519580917865,
+            "sample_standard_deviation": 0.13460832045326468,
+            "standard_error": 0.013460832045326467,
+            "ci_95_lower": 0.6539427471887798,
+            "ci_95_upper": 0.7073611689947932,
+            "ci_95_half_width": 0.026709210903006656
+          },
+          "reduction_percentage_of_baseline_mean": 81.71957686342449,
+          "replications_with_nonnegative_reduction": 100
+        }
+      }
+    },
+    "current_benchmark": {
+      "scenario_summaries": {
+        "baseline": {
+          "mean_waiting_time_minutes": {
+            "replications": 100,
+            "mean": 0.00031861769441239335,
+            "sample_standard_deviation": 0.0018595266933954973,
+            "standard_error": 0.00018595266933954974,
+            "ci_95_lower": -0.00005035274119240192,
+            "ci_95_upper": 0.0006875881300171887,
+            "ci_95_half_width": 0.0003689704356047953
+          },
+          "mean_charger_utilisation": 0.16677218647024175,
+          "mean_time_average_queue_length": 0.00002111588841759916,
+          "mean_maximum_queue_length": 0.13,
+          "mean_measured_arrivals": 2882.6
+        },
+        "capacity": {
+          "mean_waiting_time_minutes": {
+            "replications": 100,
+            "mean": 0.00009830584928994211,
+            "sample_standard_deviation": 0.0007330070290581176,
+            "standard_error": 0.00007330070290581175,
+            "ci_95_lower": -0.00004713864676033724,
+            "ci_95_upper": 0.00024375034534022147,
+            "ci_95_half_width": 0.00014544449605027936
+          },
+          "mean_charger_utilisation": 0.16059543882319577,
+          "mean_time_average_queue_length": 0.000006466266763378472,
+          "mean_maximum_queue_length": 0.04,
+          "mean_measured_arrivals": 2882.6
+        },
+        "charge_and_go": {
+          "mean_waiting_time_minutes": {
+            "replications": 100,
+            "mean": 0.0,
+            "sample_standard_deviation": 0.0,
+            "standard_error": 0.0,
+            "ci_95_lower": 0.0,
+            "ci_95_upper": 0.0,
+            "ci_95_half_width": 0.0
+          },
+          "mean_charger_utilisation": 0.1385142369166491,
+          "mean_time_average_queue_length": 0.0,
+          "mean_maximum_queue_length": 0.0,
+          "mean_measured_arrivals": 2882.6
+        }
+      },
+      "paired_comparisons": {
+        "capacity": {
+          "paired_waiting_time_reduction_minutes": {
+            "replications": 100,
+            "mean": 0.00022031184512245124,
+            "sample_standard_deviation": 0.0011575978115428939,
+            "standard_error": 0.00011575978115428939,
+            "ci_95_lower": -0.000009380673031304809,
+            "ci_95_upper": 0.0004500043632762073,
+            "ci_95_half_width": 0.00022969251815375605
+          },
+          "reduction_percentage_of_baseline_mean": null,
+          "replications_with_nonnegative_reduction": 100
+        },
+        "charge_and_go": {
+          "paired_waiting_time_reduction_minutes": {
+            "replications": 100,
+            "mean": 0.00031861769441239335,
+            "sample_standard_deviation": 0.0018595266933954973,
+            "standard_error": 0.00018595266933954974,
+            "ci_95_lower": -0.00005035274119240192,
+            "ci_95_upper": 0.0006875881300171887,
+            "ci_95_half_width": 0.0003689704356047953
+          },
+          "reduction_percentage_of_baseline_mean": null,
+          "replications_with_nonnegative_reduction": 100
+        }
+      }
+    }
+  }
+}
