@@ -75,3 +75,60 @@ The central takeaway is still clear. Under high demand, improving turnover affec
 - State that the result is based on **mean waiting time**, not total cost.
 - Explain why charging completion and departure are separate events.
 - If time is short, shorten examples and transitions, but retain the limitations and conditional recommendation.
+# SEEM3410 Presentation Script
+
+**Topic:** Reducing Waiting at Science Park P2 EV Quick Chargers  
+**Target duration:** 4 minutes 30 seconds (Strictly under 5 minutes)  
+**Slides:** 9  
+
+## Suggested speaker allocation
+
+- **Ngan Yuk Kuen:** Slides 1-3, approximately 1 minute 30 seconds
+- **Jundong Mei:** Slides 4-6, approximately 1 minute 30 seconds
+- **Zhiyuan Han:** Slides 7-9, approximately 1 minute 30 seconds
+
+The timings below are targets to keep the entire presentation within 5 minutes. Transitions between speakers should be immediate without extra introductions.
+
+## Slide 1 - Title and project focus (0:00-0:20)
+
+Good morning. Our project uses discrete-event simulation to reduce vehicle waiting at Science Park Car Park P2's quick-charging subsystem. We compare two policies—adding one quick charger versus a charge-and-go policy—evaluated by one primary metric: mean vehicle waiting time.
+
+## Slide 2 - Decision problem (0:20-0:50)
+
+According to the EPD database, P2 has 26 quick chargers. We model only these 26 homogeneous chargers under one pooled FCFS queue, since cross-tier connector and customer-choice data are unavailable. As shown in the event flow, a charger stays occupied during both active charging and post-charge dwell until departure. Policy A adds one charger to reach 27, while Policy B keeps 26 chargers but cuts post-charge occupation.
+
+## Slide 3 - Evidence and synthetic inputs (0:50-1:30)
+
+We strictly separate observed evidence from synthetic assumptions. Only the 26-charger count is P2-specific; external Hong Kong studies merely guide peak windows and the 10 to 20 percent utilisation range. Since P2 transaction timestamps are unavailable, we use synthetic inputs: piecewise Poisson arrivals, triangular active charging, and triangular baseline dwell. We test two demand cases: a high-demand planning profile with 192 arrivals per day, and a halved benchmark with 96 arrivals per day.
+
+## Slide 4 - DES model and experiment (1:30-2:05)
+
+In our Python discrete-event simulation, charging completion and departure are separate events so post-charge dwell still blocks the charger. We run 100 paired replications per profile, each with a 7-day warm-up and 30 measured days, reporting 95% Student-t confidence intervals. Using common random numbers preserves matched arrivals and quantiles across policies. Fifteen automated tests passed, confirming conservation, FCFS order, and exact agreement with hand-calculated queues.
+
+## Slide 5 - Main planning-demand results (2:05-2:35)
+
+Under the high-demand planning profile, baseline mean waiting is 0.833 minutes. Adding one charger lowers it to 0.577 minutes—a 30.7 percent reduction. Charge-and-go lowers it further to 0.152 minutes—an 81.7 percent reduction. Both paired intervals exclude zero. Charge-and-go wins because it releases capacity after every session rather than adding just one server. Note that this compares waiting time, not financial cost.
+
+## Slide 6 - Current benchmark versus planning case (2:35-3:00)
+
+However, our recommendation depends on demand. Under the lower current benchmark, baseline waiting is practically zero—just 0.019 seconds—and both improvement intervals include zero. Therefore, under current benchmark demand, no intervention is justified; only if P2 faces high planning-level congestion should operators pilot charge-and-go first.
+
+## Slide 7 - Sensitivity analysis (3:00-3:30)
+
+One-factor sensitivity analysis shows waiting grows nonlinearly: at 1.2 times planning demand, baseline waiting reaches 3.09 minutes, versus 0.85 minutes under charge-and-go. Across 12 tested settings, charge-and-go outperforms added capacity in 11 and ties in the low-demand case. Halving baseline dwell narrows its advantage most, confirming that post-charge dwell drives policy impact.
+
+## Slide 8 - Recommendation (3:30-4:00)
+
+We recommend a three-step staged decision. First, measure anonymised P2 timestamps for arrival, charging completion, and departure. Second, refit the model with local data. Third, match the action to demand: retain the 26 chargers if waiting is negligible, or pilot charge-and-go—using notifications, a grace period, and overstay rules—if peak demand and dwell are material. Adding a charger remains a fallback.
+
+## Slide 9 - Limitations and conclusion (4:00-4:30)
+
+Our main limitations are synthetic demand and dwell distributions, plus omitting implementation cost, customer compliance, charger failures, reservations, and grid constraints. Thus, the model supports local data collection and a low-cost pilot rather than an immediate permanent commitment. Ultimately, Science Park should verify local demand and dwell before acting. Thank you.
+
+## Rehearsal checklist
+
+- Keep the distinction between **official data**, **external references** and **synthetic assumptions** explicit.
+- Do not describe the planning profile as actual P2 demand.
+- State that the result is based on **mean waiting time**, not total cost.
+- Explain why charging completion and departure are separate events.
+- Keep speaker transitions immediate to stay strictly under 5 minutes.
